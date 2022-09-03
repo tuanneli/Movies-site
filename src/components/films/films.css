@@ -1,0 +1,77 @@
+
+.page {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-left: 5px;
+    cursor: pointer;
+    user-select: none;
+    width: 2em;
+}
+
+.selectedPage {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    margin-left: 5px;
+    color: red;
+    cursor: pointer;
+    user-select: none;
+    width: 2em;
+}
+
+.card img {
+    object-fit: fill;
+    height: 20em;
+}
+
+img:hover {
+    opacity: 0.25;
+}
+
+.film-name {
+    margin: 0 -1em;
+    height: 19em;
+    align-self: center;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: linear-gradient(180deg, white, black, black, black, white);
+}
+
+.film-description {
+}
+
+.card-box {
+    width: 20%;
+}
+
+@media (max-width: 1200px) {
+    .card-box {
+        width: 25%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .card-box {
+        width: 33.33%;
+    }
+}
+
+@media (max-width: 800px) {
+    .card-box {
+        width: 50%;
+    }
+}
+
+@media (max-width: 500px) {
+    .card-box {
+        width: 100%;
+    }
+}
