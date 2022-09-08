@@ -1,11 +1,25 @@
-import React, {Dispatch} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import bgImage from '../../assets/2.jpeg'
+import {useAppDispatch} from "../../redux/redux";
+import {filmsSlice} from "../../redux/tops-page-reducer";
+import {Link, NavLink} from "react-router-dom";
+// import {DensityMediumIcon} from '@mui/icons-material'
+// import {DensityMediumIcon, Menu} from "@mui/icons-material";
 
-interface INavbar {
-    setTopFilms: Dispatch<string>
-}
+const Navbar = () => {
 
-const Navbar = ({setTopFilms}: INavbar) => {
+    const dispatch = useAppDispatch()
+    const [searchValue, setSearchValue] = useState<string>('')
+    const searchInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.target.value)
+    }
+
+
+    const handelSubmitSearch = () => {
+        dispatch(filmsSlice.actions.setKeyWord(searchValue))
+        window.localStorage.setItem('searchValue', JSON.stringify(searchValue))
+    }
+
     return (
         <nav className="navbar navbar-expand-lg position-fixed w-100 bg-white"
              style={{
@@ -17,16 +31,19 @@ const Navbar = ({setTopFilms}: INavbar) => {
              }}
         >
             <div className="container-fluid">
-                <a className="navbar-brand text-white" href="#">Navbar</a>
+                <div className="navbar-brand text-white" style={{userSelect: "none"}}>IFilms</div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                    <div style={{width: '30px', height: '3px', backgroundColor: 'white', margin: '6px 0'}}/>
+                    <div style={{width: '30px', height: '3px', backgroundColor: 'white', margin: '6px 0'}}/>
+                    <div style={{width: '30px', height: '3px', backgroundColor: 'white', margin: '6px 0'}}/>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active text-white" aria-current="page" href="#">Home</a>
+                            <NavLink className="nav-link active text-white" aria-current="page"
+                                     to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link text-white" href="#">Link</a>
@@ -35,40 +52,54 @@ const Navbar = ({setTopFilms}: INavbar) => {
                             <a className="nav-link dropdown-toggle text-white" href="#" role="button"
                                data-bs-toggle="dropdown"
                                aria-expanded="false">
-                                Top
+                                Топ
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item"
-                                       style={{cursor: "pointer"}}
-                                       onClick={() => setTopFilms('TOP_100_POPULAR_FILMS')}>
+                                <li><Link className="dropdown-item"
+                                          to={'/top'}
+                                          style={{cursor: "pointer"}}
+                                          onClick={() => dispatch(filmsSlice.actions.setTopFilms('TOP_100_POPULAR_FILMS'))}>
                                     Toп
                                     популярных
-                                    фильмов</a>
+                                    фильмов</Link>
                                 </li>
-                                <li><a className="dropdown-item"
-                                       style={{cursor: "pointer"}}
-                                       onClick={() => setTopFilms('TOP_250_BEST_FILMS')}>
+                                <li><Link className="dropdown-item"
+                                          style={{cursor: "pointer"}}
+                                          to={'/top'}
+                                          onClick={() => dispatch(filmsSlice.actions.setTopFilms('TOP_250_BEST_FILMS'))}>
                                     Toп
                                     лучших
-                                    фильмов</a>
+                                    фильмов</Link>
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider"/>
                                 </li>
-                                <li><a className="dropdown-item"
-                                       style={{cursor: "pointer"}}
-                                       onClick={() => setTopFilms('TOP_AWAIT_FILMS')}>Toп
-                                    ожидания</a></li>
+                                <li><Link className="dropdown-item"
+                                          style={{cursor: "pointer"}}
+                                          to={'/top'}
+                                          onClick={() => dispatch(filmsSlice.actions.setTopFilms('TOP_AWAIT_FILMS'))}>Toп
+                                    ожидания</Link></li>
                             </ul>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link disabled">Disabled</a>
                         </li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button className="btn btn-outline-success" type="submit">Search</button>
+
+                    <form className="d-flex"
+                          role="search">
+                        <input className="form-control me-2"
+                               type="search"
+                               placeholder="Фильмы, сериалы"
+                               value={searchValue}
+                               onChange={searchInputHandler}
+                               aria-label="Search"/>
+                        <button className="btn btn-outline-dark text-white border-white"
+                                onClick={handelSubmitSearch}
+                                type="submit">Поиск
+                        </button>
                     </form>
+
                 </div>
             </div>
         </nav>

@@ -2,3 +2,35 @@
     padding: 0;
     margin: 0;
 }
+
+.heart {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    color: red;
+    padding: 8px;
+    text-shadow: 5px 10px;
+    position: absolute;
+}
+
+.heart-empty {
+    cursor: pointer;
+}
+
+.heart-filled {
+    width: 108px;
+    height: 108px;
+    color: transparent;
+    cursor: pointer;
+    z-index: 0;
+}
+
+.heart-filled:hover {
+    color: blue;
+}
+
+.heart-filled:active {
+    color: white;
+}
+
+

@@ -1,13 +1,16 @@
 import React, {Dispatch, useState} from 'react';
+import {useAppDispatch} from "../../redux/redux";
+import {filmsSlice} from "../../redux/tops-page-reducer";
 
 interface IPagesCarousel {
     pagesCount: number
     currentPage: number
-    setCurrentPage: Dispatch<number>
 }
 
-const PagesCarousel = ({pagesCount, currentPage, setCurrentPage}: IPagesCarousel) => {
+const PagesCarousel = ({pagesCount, currentPage}: IPagesCarousel) => {
     const [portionNumber, setPortionNumber] = useState<number>(1)
+
+    const dispatch = useAppDispatch()
 
     let pages: number[] = []
     const portionSize: number = 5;
@@ -31,10 +34,11 @@ const PagesCarousel = ({pagesCount, currentPage, setCurrentPage}: IPagesCarousel
     return (
         <div className='text-white d-flex justify-content-center py-2 pb-1'>
             {pages.filter(pages => pages >= leftPortion && pages <= rightPortion).map(page => <p key={page}
-                                                                                                 onClick={() => setCurrentPage(page)}
+                                                                                                 onClick={() => dispatch(filmsSlice.actions.setCurrentPage(page))}
                                                                                                  className={page === currentPage ? 'selectedPage' : 'page'}>{page}</p>)}
         </div>
     );
 };
 
 export default PagesCarousel;
+

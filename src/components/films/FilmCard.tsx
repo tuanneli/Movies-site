@@ -1,19 +1,34 @@
 import React from 'react';
-import {IFilms} from "../../type/IFilms";
+import {Styles} from "../../type/Styles";
 import './films.css';
+import {useAppDispatch} from "../../redux/redux";
+import {filmSlice} from "../../redux/film-page-reducer";
+import {Link} from "react-router-dom";
 
 interface IFilmCard {
-    film: IFilms
+    film: Styles
 }
 
 const FilmCard = ({film}: IFilmCard) => {
 
     const ratingColor = (parseFloat(film.rating) >= 7.5) ? 'green' : parseFloat(film.rating) <= 6.5 ? 'red' : 'orange'
+    const dispatch = useAppDispatch()
+
+    const onImageClickHandler = () => {
+        dispatch(filmSlice.actions.setFilmId(film?.filmId))
+        window.localStorage.setItem('currentFilmId', JSON.stringify(film?.filmId))
+    }
 
     return (
         <div className="p-2 mr-3 card-box">
             <div className='card' style={{height: '100%'}}>
-                <img src={film?.posterUrl} className="card-img-top position-absolute" alt={film?.nameRu}/>
+                <Link to={`/film/${film?.filmId}`}>
+                    <img src={film?.posterUrl}
+                         draggable={'false'}
+                         onClick={onImageClickHandler}
+                         className="card-img-top position-absolute"
+                         alt={film?.nameRu}/>
+                </Link>
                 <div className="card-body pb-0">
                     <div className='film-name'>
                         <h5 className="card-title text-center px-1">{film?.nameRu} ({film?.year})</h5>
