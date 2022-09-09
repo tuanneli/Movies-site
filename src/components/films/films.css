@@ -10,6 +10,10 @@
     width: 2em;
 }
 
+.all-films-box {
+    margin-top: 60px;
+}
+
 .selectedPage {
     font-size: 22px;
     display: flex;

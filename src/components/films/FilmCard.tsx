@@ -4,6 +4,7 @@ import './films.css';
 import {useAppDispatch} from "../../redux/redux";
 import {filmSlice} from "../../redux/film-page-reducer";
 import {Link} from "react-router-dom";
+import CustomHeart from "../modules/CustomHeart";
 
 interface IFilmCard {
     film: Styles
@@ -29,6 +30,8 @@ const FilmCard = ({film}: IFilmCard) => {
                          className="card-img-top position-absolute"
                          alt={film?.nameRu}/>
                 </Link>
+                <CustomHeart currentFilm={film}
+                />
                 <div className="card-body pb-0">
                     <div className='film-name'>
                         <h5 className="card-title text-center px-1">{film?.nameRu} ({film?.year})</h5>

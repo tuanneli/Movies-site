@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux'
 import topsPageReducer from "../tops-page-reducer";
 import filmPageReducer from "../film-page-reducer";
+import favoritesReducer from "../favorites-reducer"
 import {configureStore} from "@reduxjs/toolkit";
 import {actorsAPI, filmAPI, similarsAPI} from "../../components/API";
 
@@ -16,6 +17,7 @@ import {actorsAPI, filmAPI, similarsAPI} from "../../components/API";
 const rootReducer = combineReducers({
     topsPageReducer,
     filmPageReducer,
+    favoritesReducer,
     [filmAPI.reducerPath]: filmAPI.reducer,
     [similarsAPI.reducerPath]: similarsAPI.reducer,
     [actorsAPI.reducerPath]: actorsAPI.reducer,

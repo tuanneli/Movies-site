@@ -2,3 +2,17 @@
     color: black !important;
     background-color: black !important;
 }
+
+/*zIndex: 9999;*/
+/*maxWidth: '1600px',*/
+/*// backgroundImage: `url(${bgImage})`,*/
+/*backgroundColor: "gray",*/
+/*backgroundRepeat: 'no-repeat',*/
+/*backgroundSize: 'cover',*/
+
+.navbar {
+    z-index: 9999;
+    max-width: 1600px;
+    background: linear-gradient(-45deg, black, rgba(40, 38, 38, 0.95), black);
+    width: 100%;
+}

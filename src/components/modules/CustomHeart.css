@@ -1,26 +1,28 @@
-* {
-    padding: 0;
-    margin: 0;
+.icon {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 30px;
+    top: 290px;
+    fill: transparent;
+    stroke: var(--border-color);
+    stroke-width: 30;
 }
 
 :root {
     --border-color: white;
 }
 
-.icon {
-    fill: transparent;
-    stroke: var(--border-color);
-    stroke-width: 20;
-    position: absolute;
-}
-
 .heart-main {
-    fill: red;
+    fill: transparent;
     z-index: 3;
 }
 
 .heart-background {
-    fill: blue;
+    fill: transparent;
+    stroke: transparent;
     z-index: 2;
 }
 
@@ -40,11 +42,13 @@
 }
 
 .heart-main:hover {
-    color: blue;
+    fill: rgba(192, 192, 192, 0.3);
 }
 
-.heart-background:active {
-    color: white;
+.heart-main:active {
+    fill: white;
+    width: 52px;
+    height: 52px;
 }
 
 /*.icon path {*/

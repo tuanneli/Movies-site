@@ -1,10 +1,8 @@
 import React, {ChangeEvent, useState} from 'react';
-import bgImage from '../../assets/2.jpeg'
 import {useAppDispatch} from "../../redux/redux";
 import {filmsSlice} from "../../redux/tops-page-reducer";
 import {Link, NavLink} from "react-router-dom";
-// import {DensityMediumIcon} from '@mui/icons-material'
-// import {DensityMediumIcon, Menu} from "@mui/icons-material";
+import './Navbar.css'
 
 const Navbar = () => {
 
@@ -14,22 +12,14 @@ const Navbar = () => {
         setSearchValue(e.target.value)
     }
 
-
-    const handelSubmitSearch = () => {
+    const handelSubmitSearch = (e: any) => {
         dispatch(filmsSlice.actions.setKeyWord(searchValue))
         window.localStorage.setItem('searchValue', JSON.stringify(searchValue))
+        setSearchValue('')
     }
 
     return (
-        <nav className="navbar navbar-expand-lg position-fixed w-100 bg-white"
-             style={{
-                 zIndex: '9999',
-                 maxWidth: '1600px',
-                 backgroundImage: `url(${bgImage})`,
-                 backgroundRepeat: 'no-repeat',
-                 backgroundSize: 'cover',
-             }}
-        >
+        <nav className="navbar navbar-expand-lg position-fixed">
             <div className="container-fluid">
                 <div className="navbar-brand text-white" style={{userSelect: "none"}}>IFilms</div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -46,7 +36,7 @@ const Navbar = () => {
                                      to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-white" href="#">Link</a>
+                            <Link className="nav-link text-white" to="/favorites">Избранное</Link>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle text-white" href="#" role="button"
@@ -81,9 +71,9 @@ const Navbar = () => {
                                     ожидания</Link></li>
                             </ul>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link disabled">Disabled</a>
-                        </li>
+                        {/*<li className="nav-item">*/}
+                        {/*    <a className="nav-link disabled">Disabled</a>*/}
+                        {/*</li>*/}
                     </ul>
 
                     <form className="d-flex"
@@ -94,10 +84,13 @@ const Navbar = () => {
                                value={searchValue}
                                onChange={searchInputHandler}
                                aria-label="Search"/>
-                        <button className="btn btn-outline-dark text-white border-white"
-                                onClick={handelSubmitSearch}
-                                type="submit">Поиск
-                        </button>
+                        <Link to={'/searched'}>
+                            <button className="btn btn-outline-dark text-white border-white"
+                                    onClick={handelSubmitSearch}
+                                    type="submit">
+                                Поиск
+                            </button>
+                        </Link>
                     </form>
 
                 </div>
